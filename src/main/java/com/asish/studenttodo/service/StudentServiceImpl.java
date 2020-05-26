@@ -36,4 +36,19 @@ public class StudentServiceImpl implements StudentService {
         return studentRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(String.valueOf(id)));
     }
+
+    @Override
+    public Student updateStudent(long id, Student student) {
+        Optional<Student> studentRepositoryById = studentRepository.findById(id);
+        if (studentRepositoryById.isPresent()) {
+            Student s = studentRepositoryById.get();
+            s.setEmail(student.getEmail());
+            s.setFirstName(student.getFirstName());
+            s.setBranch(student.getBranch());
+            s.setLastName(student.getLastName());
+            studentRepository.save(s);
+        }
+        return studentRepositoryById
+                .orElseThrow(() -> new EntityNotFoundException(String.valueOf(id)));
+    }
 }
