@@ -35,5 +35,10 @@ public class StudentController {
         return new ResponseEntity<>(studentService.getStudent(id), HttpStatus.OK);
     }
 
+    // Controller method for Update a particular Student of given ID.
+    @PutMapping("/update-student/{id}")
+    public ResponseEntity<Student> updateStudent(@PathVariable long id, @RequestBody Student student) {
+        return new ResponseEntity<>(studentService.updateStudent(id, student), HttpStatus.OK);
+    }
 
 }
