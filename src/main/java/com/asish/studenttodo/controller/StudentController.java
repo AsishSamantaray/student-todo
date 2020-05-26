@@ -2,7 +2,6 @@ package com.asish.studenttodo.controller;
 
 import com.asish.studenttodo.entity.Student;
 import com.asish.studenttodo.service.StudentService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,4 +28,12 @@ public class StudentController {
     public ResponseEntity<List<Student>> getAllStudent() {
         return new ResponseEntity<>(studentService.getAllStudent(), HttpStatus.OK);
     }
+
+    // Controller method for Get a particular Student of given ID from the DB.
+    @GetMapping("/get-student/{id}")
+    public ResponseEntity<Student> getStudent(@PathVariable long id) {
+        return new ResponseEntity<>(studentService.getStudent(id), HttpStatus.OK);
+    }
+
+
 }
