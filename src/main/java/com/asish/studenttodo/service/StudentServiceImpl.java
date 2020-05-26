@@ -19,6 +19,9 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Student addStudent(Student student) {
+        if(studentRepository.findByEmail(student.getEmail()) != null) {
+            throw new RuntimeException("Record already exists..");
+        }
         studentRepository.save(student);
         return student;
     }
@@ -31,6 +34,6 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public Student getStudent(long id) {
         return studentRepository.findById(id)
-                .orElseThrow(()-> new EntityNotFoundException(String.valueOf(id)));
+                .orElseThrow(() -> new EntityNotFoundException(String.valueOf(id)));
     }
 }
