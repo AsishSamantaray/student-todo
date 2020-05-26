@@ -41,4 +41,9 @@ public class StudentController {
         return new ResponseEntity<>(studentService.updateStudent(id, student), HttpStatus.OK);
     }
 
+    // Controller method for Delete a particular Student of given ID.
+    @DeleteMapping("/delete-student/{id}")
+    public ResponseEntity<Boolean> deleteStudent(@PathVariable long id) {
+        return new ResponseEntity<>(studentService.deleteStudent(id), HttpStatus.OK);
+    }
 }
