@@ -4,7 +4,9 @@ import com.asish.studenttodo.entity.Student;
 import com.asish.studenttodo.repository.StudentRepository;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -24,5 +26,11 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public List<Student> getAllStudent() {
         return studentRepository.findAll();
+    }
+
+    @Override
+    public Student getStudent(long id) {
+        return studentRepository.findById(id)
+                .orElseThrow(()-> new EntityNotFoundException(String.valueOf(id)));
     }
 }
